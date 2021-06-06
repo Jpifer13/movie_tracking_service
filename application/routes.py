@@ -6,6 +6,11 @@ from application.resources import MovieSchema
 from application.binders import create_from_resource, update_from_resource
 
 
+@flask_app.route('/', methods=['GET'])
+def healthy():
+    return '<h1>Movie service is online.</h1>'
+
+
 @flask_app.route('/movie', methods=['GET'])
 def get_movies():
     """
@@ -18,7 +23,7 @@ def get_movies():
 
 
 @flask_app.route('/movie', methods=['POST'])
-def add_movie(movie_id):
+def add_movie():
     """
     Adds a movie to the database
     """
