@@ -24,7 +24,7 @@ def get_movies():
 
 
 @flask_app.route('/movie', methods=['POST'])
-def add_movie(movie_id):
+def add_movie():
     """
     Adds a movie to the database
     """
