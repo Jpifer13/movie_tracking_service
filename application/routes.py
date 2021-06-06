@@ -6,13 +6,19 @@ from application.resources import MovieSchema
 from application.binders import create_from_resource, update_from_resource
 
 
+@flask_app.route('/', methods=['GET'])
+def healthy():
+    return '<h1>Movie service is online.</h1>'
+
+
 @flask_app.route('/movie', methods=['GET'])
 def get_movies():
     """
     Gets a list of all movies in Movie table from the database
     """
+    print('Ok')
     response = Movie.query.all()
-
+    print('good')
     result = MovieSchema(many=True).dump(response)
     return {'movies': result}, 200
 

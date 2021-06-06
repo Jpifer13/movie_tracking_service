@@ -5,7 +5,8 @@ class Config:
     """
     Common configuration
     """
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+#    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:G#N#S!S#s@database-sans.cwmzib3bivqg.us-east-1.rds.amazonaws.com:5432/database_sans'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     URL_ROOT = 'api'
 
