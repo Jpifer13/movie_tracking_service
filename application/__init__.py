@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 def create_app(config):
@@ -15,9 +16,9 @@ def create_app(config):
 
 def register_routes(application) -> None:
     with application.app_context():
-        import application.routes as routes
+        import application.controllers as controllers
         blueprints = [
-            routes.urls
+            controllers.routes.urls
         ]
 
         for blueprint in blueprints:

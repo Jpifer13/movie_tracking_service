@@ -5,7 +5,7 @@ from application.resources import MovieSchema
 from application.binders import create_from_resource, update_from_resource
 from application.exceptions.handler import handle_service_errors
 
-urls = Blueprint('routes', __name__)
+urls = Blueprint('endpoints', __name__)
 
 @handle_service_errors
 @urls.route('/', methods=['GET'])
@@ -13,8 +13,8 @@ def healthy():
     return '<h1>Movie service is online.</h1>'
 
 
-@urls.route('/movie', methods=['GET'])
 @handle_service_errors
+@urls.route('/movie', methods=['GET'])
 def get_movies():
     """
     Gets a list of all movies in Movie table from the database
