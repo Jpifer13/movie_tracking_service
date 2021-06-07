@@ -1,12 +1,20 @@
-from flask import make_response, jsonify
-from flask import request
-from application import flask_app, db
+from flask import Blueprint, request
+from application import db
 from application.models import Movie
 from application.resources import MovieSchema
 from application.binders import create_from_resource, update_from_resource
+from application.exceptions.handler import handle_service_errors
+
+urls = Blueprint('endpoints', __name__)
+
+@handle_service_errors
+@urls.route('/', methods=['GET'])
+def healthy():
+    return '<h1>Movie service is online.</h1>'
 
 
-@flask_app.route('/movie', methods=['GET'])
+@handle_service_errors
+@urls.route('/movie', methods=['GET'])
 def get_movies():
     """
     Gets a list of all movies in Movie table from the database
@@ -17,8 +25,9 @@ def get_movies():
     return {'movies': result}, 200
 
 
-@flask_app.route('/movie', methods=['POST'])
-def add_movie(movie_id):
+@handle_service_errors
+@urls.route('/movie', methods=['POST'])
+def add_movie():
     """
     Adds a movie to the database
     """
@@ -33,7 +42,8 @@ def add_movie(movie_id):
     return {'movie': response}, 201
 
 
-@flask_app.route('/movie/<movie_id>', methods=['PATCH'])
+@handle_service_errors
+@urls.route('/movie/<movie_id>', methods=['PATCH'])
 def update_movie(movie_id):
     """
     Adds a movie to the database
@@ -54,7 +64,8 @@ def update_movie(movie_id):
     return {'movie': response}, 201
 
 
-@flask_app.route('/movie/<movie_id>', methods=['DELETE'])
+@handle_service_errors
+@urls.route('/movie/<movie_id>', methods=['DELETE'])
 def delete_movie(movie_id):
     Movie.query.filter(Movie.movie_id == movie_id).delete()
 
