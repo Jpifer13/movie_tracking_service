@@ -26,7 +26,8 @@ class TestingConfig(Config):
     DEBUG = True
     TESTING = True
     SQLALCHEMY_ECHO = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite+pysqlite:///:memory:'
+    # SQLALCHEMY_DATABASE_URI = 'sqlite+pysqlite:///:memory:'
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 
 app_config = {
